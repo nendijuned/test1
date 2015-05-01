@@ -1,0 +1,371 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PoliklinikTelkomUniversity
+{
+    class pasien
+    {
+        public String nama;
+        public String nim;
+        public String fakultas;
+        public String alamat;
+        public String no_hp;
+        public String jns_klmn;
+        public int umur;
+
+        public String getNama()
+        {
+            return nama;
+        }
+        public String getNim()
+        {
+            return nim;
+        }
+        public String getFakultas()
+        {
+            return fakultas;
+        }
+        public String getAlamat()
+        {
+            return alamat;
+        }
+        public String getNo_hp()
+        {
+            return no_hp;
+        }
+        public String getJns_klmn()
+        {
+            return jns_klmn;
+        }
+        public int getUmur()
+        {
+            return umur;
+        }
+
+        public void setNama(String nama)
+        {
+            this.nama = nama;
+        }
+        public void setNim(String nim)
+        {
+            this.nim = nim;
+        }
+        public void setFakultas(String fakultas)
+        {
+            this.fakultas = fakultas;
+        }
+        public void setAlamat(String alamat)
+        {
+            this.alamat = alamat;
+        }
+        public void setNo_hp(String no_hp)
+        {
+            this.no_hp = no_hp;
+        }
+        public void setUmur(int nama)
+        {
+            this.umur = umur;
+        }
+        public void setJns_klmn(String jns_klmn)
+        {
+            this.jns_klmn = jns_klmn;
+        }
+
+
+
+    }
+
+
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using MySql.Data.MySqlClient;
+
+namespace PoliklinikTelkomUniversity
+{
+    
+    class Dokter
+    {
+        public String nama;
+        public String idDokter;
+        public String alamat;
+        public String no_hp;
+        public String piket;
+        public String password;
+        public String username;
+
+        public String getNama() {
+            return nama;
+        }
+        public String getIdDokter() {
+            return idDokter;
+        }
+        public String getAlamat() {
+            return alamat;
+        }
+        public String getNo_hp() {
+            return no_hp;
+        }
+        public String getPiket() {
+            return piket;
+        }
+        public String getPassword() {
+            return password;
+        }
+
+        public String getUsername()
+        {
+            return username;
+        }
+
+        public void setNama(String nama) {
+            this.nama = nama;
+        }
+        public void setIdDokter(String idDokter) {
+            this.idDokter = idDokter;
+        }
+        public void setAlamat(String alamat) {
+            this.alamat = alamat;
+        }
+        public void setNo_hp(String no_hp) {
+            this.no_hp = no_hp;
+        }
+        public void setPiket(String piket)
+        {
+            this.piket = piket;
+        }
+        public void setPassword(String password)
+        {
+            this.password = password;
+        }
+
+        public void setUsername(String username)
+        {
+            this.username = username;
+        }
+
+        public void konekDokter()
+        {
+            String koneksi = "datasource=localhost;port=3306;username=root";
+            MySqlConnection myKoneksi = new MySqlConnection(koneksi);
+            //MySqlDataAdapter myDataAdapter = new MySqlDataAdapter();
+            MySqlCommand SelectCommand = new MySqlCommand("select * from poliklinik.dokter where username='" + this.getUsername() + "'and password='" + this.getPassword() + " ;", myKoneksi);
+            //MySqlCommandBuilder cb = new MySqlCommandBuilder(myDataAdapter);
+            MySqlDataReader myReader;
+            myKoneksi.Open();
+            myReader = SelectCommand.ExecuteReader();
+            
+            myKoneksi.Close();
+            
+        }
+        
+
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using MySql.Data.MySqlClient;
+
+
+namespace PoliklinikTelkomUniversity
+{
+    class pegawai
+    {
+        public String nama;
+        public String idPegawai;
+        public String alamat;
+        public String no_hp;
+        public String password;
+        public String username;
+
+        public String getNama()
+        {
+            return nama;
+        }
+        public String getidPegawai()
+        {
+            return idPegawai;
+        }
+        public String getAlamat()
+        {
+            return alamat;
+        }
+        public String getNo_hp()
+        {
+            return no_hp;
+        }
+        public String getPassword()
+        {
+            return password;
+        }
+
+        public String getUsername()
+        {
+            return username;
+        }
+
+
+        public void setNama(String nama)
+        {
+            this.nama = nama;
+        }
+        public void setIdPegawai(String idPegawai)
+        {
+            this.idPegawai = idPegawai;
+        }
+        public void setAlamat(String alamat)
+        {
+            this.alamat = alamat;
+        }
+        public void setNo_hp(String no_hp)
+        {
+            this.no_hp = no_hp;
+        }
+        public void setPassword(String password)
+        {
+            this.password = password;
+        }
+
+        public void setUsername(String username)
+        {
+            this.username = username;
+        }
+
+        public void koneksiPegawai() {
+                String koneksi = "datasource=localhost;port=3306;username=root";
+                MySqlConnection myKoneksi = new MySqlConnection(koneksi);
+                MySqlDataAdapter myDataAdapter = new MySqlDataAdapter();
+                myDataAdapter.SelectCommand = new MySqlCommand("select * poliklinik.pegawai where username='"+this.getUsername() +"'and password='"+this.getPassword()+" ;", myKoneksi);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(myDataAdapter);
+                myKoneksi.Open();
+            
+                myKoneksi.Close();
+            
+        }
+
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PoliklinikTelkomUniversity
+{
+    class periksa
+    {
+        int kode_periksa;
+        String nama;
+        String diagnosa;
+        String tindakan;
+        DateTime tgl_periksa;
+        String resep;
+
+        public int getKode_periksa()
+        {
+            return kode_periksa;
+        }
+        public String getNama()
+        {
+            return nama;
+        }
+        public String getDiagnosa()
+        {
+            return diagnosa;
+        }
+        public String getTindakan()
+        {
+            return tindakan;
+        }
+        public DateTime getTgl_periksa()
+        {
+            return tgl_periksa;
+        }
+        public String getResep()
+        {
+            return resep;
+        }
+
+        public void setKode_periksa(int kode_periksa)
+        {
+            this.kode_periksa = kode_periksa;
+        }
+        public void setNama(String nama)
+        {
+            this.nama = nama;
+        }
+        public void setDignosa(String diagnosa)
+        {
+            this.diagnosa = diagnosa;
+        }
+        public void setTindakan(String tindakan)
+        {
+            this.tindakan = tindakan;
+        }
+        public void setResep(String resep)
+        {
+            this.resep = resep;
+        }
+
+
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace PoliklinikTelkomUniversity
+{
+    public partial class obatForm : Form
+    {
+        public obatForm()
+        {
+            InitializeComponent();
+        }
+
+        private void btn_diagnosa_Click(object sender, EventArgs e)
+        {
+            diagnosa dg = new diagnosa();
+            dg.Show();
+            this.Hide();
+        }
+
+        private void btn_record_Click(object sender, EventArgs e)
+        {
+            dokterForm dr = new dokterForm();
+            dr.Show();
+            this.Hide();
+        }
+
+        private void btn_pasien_Click(object sender, EventArgs e)
+        {
+            pasienForm pa = new pasienForm();
+            pa.Show();
+            this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            loginForm lf = new loginForm();
+            lf.Show();
+            this.Hide();
+        }
+    }
+}
+
